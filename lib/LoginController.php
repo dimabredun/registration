@@ -18,7 +18,13 @@ class LoginController extends Login
             exit();
         }
 
+        if (!str_contains($this->login, '@')) {
+            $this->getUser($this->login, $this->password, true);
+            return;
+        }
+
         $this->getUser($this->login, $this->password);
+
     }
 
     private function blankField(): bool

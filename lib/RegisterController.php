@@ -59,6 +59,7 @@ class RegisterController extends Register
 
         $this->setUser($this->email, $this->login, $this->realName,
         $this->password, $this->birthDate, $this->country, $this->date);
+
         unset($_SESSION['email']);
         unset($_SESSION['login']);
         unset($_SESSION['realName']);
@@ -78,7 +79,7 @@ class RegisterController extends Register
 
     private function invalidLogin(): bool
     {
-        if (!preg_match('/^[a-zA-Z8-9]*$/', $this->login)) {
+        if (!preg_match('/^[a-zA-Z0-9]*$/', $this->login)) {
             return false;
         } else {
             return true;
@@ -105,7 +106,7 @@ class RegisterController extends Register
 
     private function isUserExist(): bool
     {
-        if ($this->usernameValidation($this->login, $this->email)) {
+        if (!$this->usernameValidation($this->email, $this->login)) {
             return false;
         } else {
             return true;
